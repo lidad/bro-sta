@@ -20,6 +20,9 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+## todos
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# -
+1. 过三关老虎机
+2. 哄抬BI价
+3. 官方大酒店
+4. 进厂打工
