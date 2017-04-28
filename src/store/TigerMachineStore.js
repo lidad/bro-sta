@@ -16,10 +16,10 @@ const MIDDLE_TIME = 200;
 const FINAL_TIME = 500;
 
 async function runMachine(commit) {
-  const titleTime = Math.round(Math.random() * 1E2);
-  const earlyStage = 0.6 * titleTime * EARLY_TIME;
-  const middleStage = 0.2 * titleTime * MIDDLE_TIME;
-  const finalStage = 0.12 * titleTime * FINAL_TIME;
+  const titleTime = Math.round(Math.random() * 1E4);
+  const earlyStage = 0.6 * titleTime;
+  const middleStage = 0.3 * titleTime;
+  const finalStage = 0.1 * titleTime;
 
   let tempT = await flashCard(earlyStage, EARLY_TIME);
   clearTimeout(tempT);
