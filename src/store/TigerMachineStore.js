@@ -14,7 +14,28 @@ const MACHINE_CARDS = [
 const EARLY_TIME = 100;
 const MIDDLE_TIME = 200;
 const FINAL_TIME = 500;
-// const END_TIME = 1000;
+
+async function runMachine(commit) {
+  const titleTime = Math.round(Math.random() * 1E2);
+  const earlyStage = 0.6 * titleTime * EARLY_TIME;
+  const middleStage = 0.2 * titleTime * MIDDLE_TIME;
+  const finalStage = 0.12 * titleTime * FINAL_TIME;
+
+  let tempT = await flashCard(earlyStage, EARLY_TIME);
+  clearTimeout(tempT);
+  tempT = await flashCard(middleStage, MIDDLE_TIME);
+  clearTimeout(tempT);
+  tempT = await flashCard(finalStage, FINAL_TIME);
+  clearTimeout(tempT);
+  commit('end');
+
+  function flashCard(delayTime, runTime) {
+    const newT = setInterval(() => void commit('setResult', 1), runTime);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => void resolve(newT), delayTime);
+    })
+  }
+}
 
 const state = {
   cards: MACHINE_CARDS,
@@ -51,28 +72,7 @@ const mutations = {
 const actions = {
   beginPlaying({commit}) {
     commit('begin');
-    const titleTime = Math.round(Math.random() * 1E2);
-    const earlyStage = 0.6 * titleTime * EARLY_TIME;
-    const middleStage = 0.2 * titleTime * MIDDLE_TIME;
-    const finalStage = 0.12 * titleTime * FINAL_TIME;
-    // const endStage = 0.08 * titleTime * END_TIME;
-
-    (async() => {
-      let tempT = await runMachine(earlyStage, EARLY_TIME);
-      clearTimeout(tempT);
-      tempT = await runMachine(middleStage, MIDDLE_TIME);
-      clearTimeout(tempT);
-      tempT = await runMachine(finalStage, FINAL_TIME);
-      clearTimeout(tempT);
-      commit('end');
-    })()
-
-    function runMachine(delayTime, runTime) {
-      const newT = setInterval(() => void commit('setResult', 1), runTime);
-      return new Promise((resolve, reject) => {
-        setTimeout(() => void resolve(newT), delayTime);
-      })
-    }
+    runMachine(commit);
   }
 }
 
