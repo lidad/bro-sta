@@ -11,6 +11,11 @@ const MACHINE_CARDS = [
   require('../assets/img/tiger_7.jpg')
 ]
 
+const EARLY_TIME = 100;
+const MIDDLE_TIME = 200;
+const FINAL_TIME = 500;
+// const END_TIME = 1000;
+
 const state = {
   cards: MACHINE_CARDS,
   tempSelectedIndex: 0,
@@ -19,10 +24,20 @@ const state = {
 }
 
 const mutations = {
-  selectCard(state, index) {
-    state.tempSelectedIndex = index
+  selectCard(state, dir) {
+    let index = state.tempSelectedIndex + dir;
+    if (index < 0)
+      index = state.cards.length - 1;
+    if (index >= state.cards.length)
+      index = 0;
+    state.tempSelectedIndex = index;
   },
-  setResult(state, index) {
+  setResult(state, dir) {
+    let index = state.resultIndex + dir;
+    if (index < 0)
+      index = state.cards.length - 1;
+    if (index >= state.cards.length)
+      index = 0;
     state.resultIndex = index
   },
   begin(state, index) {
@@ -36,6 +51,28 @@ const mutations = {
 const actions = {
   beginPlaying({commit}) {
     commit('begin');
+    const titleTime = Math.round(Math.random() * 1E2);
+    const earlyStage = 0.6 * titleTime * EARLY_TIME;
+    const middleStage = 0.2 * titleTime * MIDDLE_TIME;
+    const finalStage = 0.12 * titleTime * FINAL_TIME;
+    // const endStage = 0.08 * titleTime * END_TIME;
+
+    (async() => {
+      let tempT = await runMachine(earlyStage, EARLY_TIME);
+      clearTimeout(tempT);
+      tempT = await runMachine(middleStage, MIDDLE_TIME);
+      clearTimeout(tempT);
+      tempT = await runMachine(finalStage, FINAL_TIME);
+      clearTimeout(tempT);
+      commit('end');
+    })()
+
+    function runMachine(delayTime, runTime) {
+      const newT = setInterval(() => void commit('setResult', 1), runTime);
+      return new Promise((resolve, reject) => {
+        setTimeout(() => void resolve(newT), delayTime);
+      })
+    }
   }
 }
 

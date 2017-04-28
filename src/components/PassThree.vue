@@ -2,8 +2,8 @@
 <div class="pass-three">
   <ConerStatus/>
   <div v-if="playing" class="tiger-block frame-box playing">
-    <div class="items"><img v-for="(card, index) in upPlayingCards" class="tiger-item" :class="(index === selected) ? 'b-block' : ''" :src="card" /></div>
-    <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index === selected) ? 'b-block' : ''" :src="card" /></div>
+    <div class="items"><img v-for="(card, index) in upPlayingCards" class="tiger-item" :class="(index === resultIndex) ? 'b-block' : ''" :src="card" /></div>
+    <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 3  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
     <img class="result" :src="resultCard" />
   </div>
   <div v-else class="tiger-block show frame-box">
@@ -43,6 +43,7 @@ export default {
     ...mapState({
       playing: state => state.TigerMachineStore.playing,
       cards: state => state.TigerMachineStore.cards,
+      resultIndex: state => state.TigerMachineStore.resultIndex,
       selected: state => state.TigerMachineStore.tempSelectedIndex,
       upPlayingCards(state) {
         const {
@@ -81,12 +82,7 @@ export default {
       this.$store.dispatch('beginPlaying');
     },
     selectCard(dir) {
-      let index = this.selected + dir;
-      if (index < 0)
-        index = this.cards.length - 1;
-      if (index >= this.cards.length)
-        index = 0;
-      this.$store.commit('selectCard', index);
+      this.$store.commit('selectCard', dir);
     }
   }
 }
