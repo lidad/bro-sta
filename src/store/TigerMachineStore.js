@@ -32,7 +32,7 @@ async function runMachine(commit) {
   // commit('end');
 
   function flashCard(delayTime, runTime) {
-    const newT = setInterval(() => void commit('setResult', 1), runTime);
+    const newT = setInterval(() => void commit('setResult'), runTime);
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(newT), delayTime);
     })
@@ -55,10 +55,8 @@ const mutations = {
       index = 0;
     state.tempSelectedIndex = index;
   },
-  setResult(state, dir) {
-    let index = state.resultIndex + dir;
-    if (index < 0)
-      index = state.cards.length - 1;
+  setResult(state) {
+    let index = state.resultIndex + 1;
     if (index >= state.cards.length)
       index = 0;
     state.resultIndex = index
@@ -71,21 +69,19 @@ const mutations = {
   }
 }
 
-
 let MachineT;
 
 const actions = {
   beginPlaying({commit}) {
     commit('begin');
     new Promise((resolve, reject) => {
-      console.log(MachineT)
-      MachineT = setInterval(() => void commit('setResult', 1), STAND_RUN_TIME);
-      console.log(MachineT)
+      MachineT = setInterval(() => void commit('setResult'), STAND_RUN_TIME);
       setTimeout(() => resolve(MachineT), STAND_TIME);
     }).then((t) => {
       if (!t)
         return;
       clearTimeout(t);
+      MachineT = undefined;
       runMachine(commit);
     })
   },
