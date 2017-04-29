@@ -14,6 +14,8 @@ const MACHINE_CARDS = [
 const EARLY_TIME = 100;
 const MIDDLE_TIME = 200;
 const FINAL_TIME = 500;
+const STAND_TIME = 15000;
+const STAND_RUN_TIME = 50;
 
 async function runMachine(commit) {
   const titleTime = Math.round(Math.random() * 1E4);
@@ -27,12 +29,12 @@ async function runMachine(commit) {
   clearTimeout(tempT);
   tempT = await flashCard(finalStage, FINAL_TIME);
   clearTimeout(tempT);
-  commit('end');
+  // commit('end');
 
   function flashCard(delayTime, runTime) {
     const newT = setInterval(() => void commit('setResult', 1), runTime);
     return new Promise((resolve, reject) => {
-      setTimeout(() => void resolve(newT), delayTime);
+      setTimeout(() => resolve(newT), delayTime);
     })
   }
 }
@@ -69,10 +71,31 @@ const mutations = {
   }
 }
 
+
+let MachineT;
+
 const actions = {
   beginPlaying({commit}) {
     commit('begin');
+    new Promise((resolve, reject) => {
+      console.log(MachineT)
+      MachineT = setInterval(() => void commit('setResult', 1), STAND_RUN_TIME);
+      console.log(MachineT)
+      setTimeout(() => resolve(MachineT), STAND_TIME);
+    }).then((t) => {
+      if (!t)
+        return;
+      clearTimeout(t);
+      runMachine(commit);
+    })
+  },
+  end({commit}) {
+    if (!MachineT)
+      return;
+    clearTimeout(MachineT);
+    MachineT = undefined;
     runMachine(commit);
+
   }
 }
 

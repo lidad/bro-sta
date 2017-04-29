@@ -4,7 +4,10 @@
   <div v-if="playing" class="tiger-block frame-box playing">
     <div class="items"><img v-for="(card, index) in upPlayingCards" class="tiger-item" :class="(index === resultIndex) ? 'b-block' : ''" :src="card" /></div>
     <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 3  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
-    <img class="result" :src="resultCard" />
+    <div class="end-action">
+      <img class="result" :src="resultCard" />
+      <button @click="end" class="end t-shadow b-block">停</button>
+    </div>
   </div>
   <div v-else class="tiger-block show frame-box">
     <img v-for="(card, index) in cards" class="tiger-item" :class="(index === selected) ? 'b-block' : ''" :src="card" />
@@ -83,6 +86,9 @@ export default {
     },
     selectCard(dir) {
       this.$store.commit('selectCard', dir);
+    },
+    end() {
+      this.$store.dispatch('end');
     }
   }
 }
@@ -113,10 +119,18 @@ export default {
             left: px2rem(48);
             height: px2rem(260);
             text-align: center;
-            .result {
-                width: px2rem(120);
-                height: px2rem(120);
+            .end-action {
                 margin-top: px2rem(20);
+                line-height: px2rem(120);
+                .result {
+                    width: px2rem(120);
+                    height: px2rem(120);
+                }
+                .end {
+                    margin-left: px2rem(25);
+                    vertical-align: middle;
+                    font-size: px2rem(25);
+                }
             }
         }
         .items {
