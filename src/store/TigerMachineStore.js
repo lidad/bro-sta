@@ -43,7 +43,8 @@ const state = {
   cards: MACHINE_CARDS,
   tempSelectedIndex: 0,
   resultIndex: 0,
-  playing: false
+  playing: false,
+  odds: 0
 }
 
 const mutations = {
@@ -66,6 +67,9 @@ const mutations = {
   },
   end(state, index) {
     state.playing = false;
+  },
+  adjustOdds(state, plus) {
+    state.odds += plus * 0.5
   }
 }
 
