@@ -4,7 +4,7 @@ import Hello from '@/components/Hello'
 import MianMap from '@/components/MianMap'
 import BroStatus from '@/components/BroStatus'
 import ClubCar from '@/components/ClubCar'
-import PassThree from '@/components/PassThree'
+import SlotMachine from '@/components/SlotMachine'
 
 Vue.use(Router)
 
@@ -27,9 +27,9 @@ export default new Router({
       name: 'club',
       component: ClubCar
     }, {
-      path: '/passthree',
-      name: 'passThree',
-      component: PassThree
+      path: '/slotMachine',
+      name: 'slotMachine',
+      component: SlotMachine
     }
   ]
 })

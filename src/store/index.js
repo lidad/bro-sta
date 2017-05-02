@@ -6,7 +6,7 @@ import RuleStore from './RuleStore';
 import ActivityStore from './ActivityStore';
 import ClubStore from './ClubStore';
 import PopUpStore from './PopUpStore';
-import TigerMachineStore from './TigerMachineStore';
+import SlotMachineStore from './SlotMachineStore';
 
 Vue.use(Vuex)
 
@@ -17,7 +17,7 @@ const store = new Vuex.Store({
     ActivityStore,
     ClubStore,
     PopUpStore,
-    TigerMachineStore
+    SlotMachineStore
   }
 })
 

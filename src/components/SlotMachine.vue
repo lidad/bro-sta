@@ -1,6 +1,7 @@
 <template>
 <div class="pass-three">
   <ConerStatus/>
+  <SlotMachineCast/>
   <div v-if="playing" class="tiger-block frame-box playing">
     <div class="items"><img v-for="(card, index) in upPlayingCards" class="tiger-item" :class="(index === resultIndex) ? 'b-block' : ''" :src="card" /></div>
     <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 4  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
@@ -36,6 +37,7 @@
 <script>
 import MapFootLink from './MapFootLink';
 import ConerStatus from './common/ConerStatus';
+import SlotMachineCast from './SlotMachineCast';
 import {
   mapState,
   mapMutations,
@@ -43,45 +45,46 @@ import {
 } from 'vuex';
 
 export default {
-  name: 'PassThree',
+  name: 'SlotMachine',
   computed: {
     ...mapState({
-      odds: state => state.TigerMachineStore.odds,
-      playing: state => state.TigerMachineStore.playing,
-      cards: state => state.TigerMachineStore.cards,
-      resultIndex: state => state.TigerMachineStore.resultIndex,
-      selected: state => state.TigerMachineStore.tempSelectedIndex,
+      odds: state => state.SlotMachineStore.odds,
+      playing: state => state.SlotMachineStore.playing,
+      cards: state => state.SlotMachineStore.cards,
+      resultIndex: state => state.SlotMachineStore.resultIndex,
+      selected: state => state.SlotMachineStore.tempSelectedIndex,
       upPlayingCards(state) {
         const {
           cards
-        } = state.TigerMachineStore;
+        } = state.SlotMachineStore;
         return cards.slice(0, cards.length / 2);
       },
       downPlayingCards(state) {
         const {
           cards
-        } = state.TigerMachineStore;
+        } = state.SlotMachineStore;
         return cards.slice(cards.length / 2, cards.length);
       },
       selectedCard(state) {
         const {
           cards,
           tempSelectedIndex
-        } = state.TigerMachineStore;
+        } = state.SlotMachineStore;
         return cards.find((card, i) => i === tempSelectedIndex);
       },
       resultCard(state) {
         const {
           cards,
           resultIndex
-        } = state.TigerMachineStore;
+        } = state.SlotMachineStore;
         return cards.find((card, i) => i === resultIndex);
       },
     }),
   },
   components: {
     MapFootLink,
-    ConerStatus
+    ConerStatus,
+    SlotMachineCast
   },
   methods: {
     ...mapMutations(['selectCard', 'adjustOdds']),

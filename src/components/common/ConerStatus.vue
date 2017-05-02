@@ -25,16 +25,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../assets/scss/rem.scss";
 .coner-status {
     position: fixed;
     top: 4vh;
     left: 4vh;
     padding: 1vw;
     color: rgba(255, 255, 255,0.9);
-    font-size: 10px;
+    font-size: px2rem(10);
     .title {
-        padding: 2px 20px 2px 2px;
+        padding: px2rem(2) px2rem(20) px2rem(2) px2rem(2);
         color: #FFFFFF;
+        font-size: px2rem(14);
     }
 }
 </style>

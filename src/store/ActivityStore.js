@@ -5,7 +5,7 @@ const GAMBLING = {
   id: 'ZHVibw==',
   name: '过三关',
   tips: '搏一搏，单车变摩托',
-  url: '/passthree',
+  url: '/slotMachine',
   signImg: require('../assets/img/card_game.jpg'),
   imgUrl: require('../assets/img/gambling.jpg'),
   positions: [

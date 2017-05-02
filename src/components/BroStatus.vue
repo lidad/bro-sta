@@ -36,6 +36,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/rem.scss";
 .status {
     height: 100vh;
     width: 100vw;
@@ -45,7 +46,7 @@ export default {
         margin-left: 13%;
         padding-top: 10vh;
         color: #FFFFFF;
-        font-size: 20px;
+        font-size: px2rem(20);
     }
     .bg {
         background: transparent url('../assets/img/bro_back.jpg') left top no-repeat;
@@ -59,11 +60,11 @@ export default {
         background-color: rgba(51, 51, 51,0.5);
         width: 80%;
         padding: 5px 5%;
-        margin-top: 10px;
+        margin-top: px2rem(10);
         margin-left: 5%;
         > * {
-            margin-bottom: 5px;
-            font-size: 10px;
+            margin-bottom: px2rem(5);
+            font-size: px2rem(10);
             color: #e9e9e9;
         }
     }
