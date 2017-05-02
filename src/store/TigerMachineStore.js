@@ -44,7 +44,7 @@ const state = {
   tempSelectedIndex: 0,
   resultIndex: 0,
   playing: false,
-  odds: 0
+  odds: 1
 }
 
 const mutations = {
@@ -69,9 +69,11 @@ const mutations = {
     state.playing = false;
   },
   adjustOdds(state, plus) {
-    state.odds += plus * 0.5
+    const tempOdds = state.odds + plus * 0.5;
+    if (~~ tempOdds)
+      state.odds = tempOdds;
+    }
   }
-}
 
 let MachineT;
 

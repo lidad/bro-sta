@@ -18,14 +18,14 @@
     <div class="choose-block">
       <img class="expect" :src="selectedCard" />
       <div class="bet t-shadow">
-        <button class="up btn"><img src="../assets/img/fold.png"></button>
-        <p class="num">0.0</p>
+        <button @click="adjustOdds(1)" class="up btn"><img src="../assets/img/fold.png"></button>
+        <p class="num">{{odds.toFixed(1)}}</p>
         <p class="tips">加倍</p>
-        <button class="down btn"><img src="../assets/img/unfold.png"></button>
+        <button @click="adjustOdds(-1)" class="down btn"><img src="../assets/img/unfold.png"></button>
       </div>
     </div>
     <div class="actions">
-      <button class="left b-block t-shadow" @click="play">上</button>
+      <button class="left b-block t-shadow" @click="beginPlaying">上</button>
       <button class="b-block t-shadow">撤</button>
     </div>
   </div>
@@ -37,13 +37,16 @@
 import MapFootLink from './MapFootLink';
 import ConerStatus from './common/ConerStatus';
 import {
-  mapState
+  mapState,
+  mapMutations,
+  mapActions
 } from 'vuex';
 
 export default {
   name: 'PassThree',
   computed: {
     ...mapState({
+      odds: state => state.TigerMachineStore.odds,
       playing: state => state.TigerMachineStore.playing,
       cards: state => state.TigerMachineStore.cards,
       resultIndex: state => state.TigerMachineStore.resultIndex,
@@ -81,15 +84,8 @@ export default {
     ConerStatus
   },
   methods: {
-    play() {
-      this.$store.dispatch('beginPlaying');
-    },
-    selectCard(dir) {
-      this.$store.commit('selectCard', dir);
-    },
-    end() {
-      this.$store.dispatch('end');
-    }
+    ...mapMutations(['selectCard', 'adjustOdds']),
+    ...mapActions(['end', 'beginPlaying'])
   }
 }
 </script>
