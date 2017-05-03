@@ -27,7 +27,7 @@
     </div>
     <div class="actions">
       <button class="left b-block t-shadow" @click="beginPlaying">上</button>
-      <button class="b-block t-shadow">撤</button>
+      <button class="b-block t-shadow" @click="back">撤</button>
     </div>
   </div>
   <MapFootLink/>
@@ -95,7 +95,10 @@ export default {
   },
   methods: {
     ...mapMutations(['selectCard', 'adjustOdds']),
-    ...mapActions(['end', 'beginPlaying'])
+    ...mapActions(['end', 'beginPlaying']),
+    back() {
+      this.$router.back()
+    },
   }
 }
 </script>
