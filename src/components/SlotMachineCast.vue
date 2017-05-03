@@ -1,12 +1,16 @@
 <template>
 <div class="t-shadow frame-box game-cast">
-  <p>游戏费用：2000</p>
-  <p>胜利将获得：4000</p>
+  <p>游戏费用：{{cast}}</p>
+  <p>胜利将获得：{{rebate}}</p>
 </div>
 </template>
 <script>
 export default {
-  name: 'SlotMachineCast'
+  name: 'SlotMachineCast',
+  props: {
+    cast: Number,
+    rebate: Number
+  },
 }
 </script>
 <style lang="scss" scoped>

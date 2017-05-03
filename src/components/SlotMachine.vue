@@ -1,7 +1,7 @@
 <template>
 <div class="pass-three">
   <ConerStatus/>
-  <SlotMachineCast/>
+  <SlotMachineCast :cast="cast" :rebate="cast * 2" />
   <div v-if="playing" class="tiger-block frame-box playing">
     <div class="items"><img v-for="(card, index) in upPlayingCards" class="tiger-item" :class="(index === resultIndex) ? 'b-block' : ''" :src="card" /></div>
     <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 4  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
@@ -79,7 +79,14 @@ export default {
         } = state.SlotMachineStore;
         return cards.find((card, i) => i === resultIndex);
       },
-    }),
+      cast(state) {
+        const {
+          odds,
+          originalCast
+        } = state.SlotMachineStore;
+        return originalCast * odds;
+      }
+    })
   },
   components: {
     MapFootLink,

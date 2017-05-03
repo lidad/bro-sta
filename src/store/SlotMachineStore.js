@@ -44,7 +44,8 @@ const state = {
   tempSelectedIndex: 0,
   resultIndex: 0,
   playing: false,
-  odds: 1
+  odds: 1,
+  originalCast: 2000
 }
 
 const mutations = {
