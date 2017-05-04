@@ -7,7 +7,8 @@
     <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 4  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
     <div class="end-action">
       <img class="result" :src="resultCard" />
-      <button @click="end" class="end t-shadow b-block">停</button>
+      <button v-if="endGame" @click="playAgain" class="end t-shadow b-block">再来</button>
+      <button v-else @click="end" class="end t-shadow b-block">停</button>
     </div>
   </div>
   <div v-else class="tiger-block show frame-box">
@@ -50,6 +51,7 @@ export default {
     ...mapState({
       odds: state => state.SlotMachineStore.odds,
       playing: state => state.SlotMachineStore.playing,
+      endGame: state => state.SlotMachineStore.ending,
       cards: state => state.SlotMachineStore.cards,
       resultIndex: state => state.SlotMachineStore.resultIndex,
       selected: state => state.SlotMachineStore.tempSelectedIndex,
@@ -94,7 +96,7 @@ export default {
     SlotMachineCast
   },
   methods: {
-    ...mapMutations(['selectCard', 'adjustOdds']),
+    ...mapMutations(['selectCard', 'adjustOdds', 'playAgain']),
     ...mapActions(['end', 'beginPlaying']),
     back() {
       this.$router.back()

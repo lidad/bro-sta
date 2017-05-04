@@ -29,7 +29,7 @@ async function runMachine(commit) {
   clearTimeout(tempT);
   tempT = await flashCard(finalStage, FINAL_TIME);
   clearTimeout(tempT);
-  // commit('end');
+  commit('playEnd');
 
   function flashCard(delayTime, runTime) {
     const newT = setInterval(() => void commit('setResult'), runTime);
@@ -44,6 +44,7 @@ const state = {
   tempSelectedIndex: 0,
   resultIndex: 0,
   playing: false,
+  ending: false,
   odds: 1,
   originalCast: 2000
 }
@@ -65,9 +66,13 @@ const mutations = {
   },
   begin(state, index) {
     state.playing = true;
+    state.ending = false;
   },
-  end(state, index) {
+  playAgain(state) {
     state.playing = false;
+  },
+  playEnd(state) {
+    state.ending = true;
   },
   adjustOdds(state, plus) {
     const tempOdds = state.odds + plus * 0.5;
