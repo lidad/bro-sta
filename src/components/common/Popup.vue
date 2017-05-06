@@ -13,16 +13,17 @@ import {
 
 export default {
   name: 'PopUp',
-  props: ['title', 'text'],
   computed: {
     ...mapState({
       show: state => state.PopUpStore.show,
       title: state => state.PopUpStore.title,
-      tips: state => state.PopUpStore.tips
+      tips: state => state.PopUpStore.tips,
+      cb: state => state.PopUpStore.cb,
     })
   },
   methods: {
     hide() {
+      this.cb();
       this.$store.commit('Hide');
     }
   }

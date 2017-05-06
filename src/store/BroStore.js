@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 const BRO_STATUS = {
   name: '聚宝',
-  money: 1500,
+  money: 12500,
   hp: {
     total: 120,
     current: 40

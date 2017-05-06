@@ -3,7 +3,8 @@ import Vue from 'vue';
 const state = {
   show: false,
   title: '',
-  tips: ''
+  tips: '',
+  cb: () => {}
 }
 
 const mutations = {

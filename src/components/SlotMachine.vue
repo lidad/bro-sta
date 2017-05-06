@@ -27,11 +27,12 @@
       </div>
     </div>
     <div class="actions">
-      <button class="left b-block t-shadow" @click="beginPlaying">上</button>
+      <button class="left b-block t-shadow" @click="play">上</button>
       <button class="b-block t-shadow" @click="back">撤</button>
     </div>
   </div>
   <MapFootLink/>
+  <Popup/>
 </div>
 </template>
 
@@ -56,6 +57,7 @@ export default {
       cards: state => state.SlotMachineStore.cards,
       resultIndex: state => state.SlotMachineStore.resultIndex,
       selected: state => state.SlotMachineStore.tempSelectedIndex,
+      broStatus: state => state.BroStore.broStatus,
       upPlayingCards(state) {
         const {
           cards
@@ -103,6 +105,23 @@ export default {
     back() {
       this.$router.back()
     },
+    play() {
+      let popUpInfo = {};
+      if (this.broStatus.money < this.cast) {
+        popUpInfo = {
+          show: true,
+          title: '老哥，身上的钱不够耍呀'
+        }
+      } else {
+        popUpInfo = {
+          show: true,
+          title: '老哥将花费' + this.cast + '玩一发',
+          tips: '赢了加倍，输了一分钱都没有哦~',
+          cb: this.beginPlaying
+        }
+      }
+      this.$store.commit('Show', popUpInfo)
+    }
   }
 }
 </script>
