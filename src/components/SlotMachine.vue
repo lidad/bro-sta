@@ -39,6 +39,7 @@
 import MapFootLink from './MapFootLink';
 import ConerStatus from './common/ConerStatus';
 import SlotMachineCast from './SlotMachineCast';
+import Popup from './common/Popup';
 import {
   mapState,
   mapMutations,
@@ -93,7 +94,8 @@ export default {
   components: {
     MapFootLink,
     ConerStatus,
-    SlotMachineCast
+    SlotMachineCast,
+    Popup
   },
   methods: {
     ...mapMutations(['selectCard', 'adjustOdds', 'playAgain']),
