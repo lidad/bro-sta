@@ -50,15 +50,20 @@ import {
 export default {
   name: 'SlotMachine',
   beforeUpdate() {
-    if (this.playing && this.endGame) {
+    if (!this.endShow && this.playing && this.endGame) {
       let popUpInfo = {};
       if (this.selected === this.resultIndex) {
+        const rebate = this.cast * 2;
         popUpInfo = {
           show: true,
           title: '红了！老哥稳',
-          tips: this.cast * 2 + '进账',
+          tips: rebate + '进账',
           cb: () => {}
         }
+        const newBroSta = {
+          money: this.broStatus.money + rebate,
+        }
+        this.$store.commit('UpdateBro', newBroSta)
       } else {
         popUpInfo = {
           show: true,
@@ -67,7 +72,13 @@ export default {
           cb: () => {}
         }
       }
-      this.$store.commit('Show', popUpInfo)
+      this.endShow = true;
+      this.$store.commit('Show', popUpInfo);
+    }
+  },
+  data() {
+    return {
+      endShow: false
     }
   },
   computed: {
@@ -127,6 +138,7 @@ export default {
       this.$router.back()
     },
     play() {
+      this.endShow = false;
       let popUpInfo = {};
       if (this.broStatus.money < this.cast) {
         popUpInfo = {
