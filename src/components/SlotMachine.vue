@@ -49,6 +49,27 @@ import {
 
 export default {
   name: 'SlotMachine',
+  beforeUpdate() {
+    if (this.playing && this.endGame) {
+      let popUpInfo = {};
+      if (this.selected === this.resultIndex) {
+        popUpInfo = {
+          show: true,
+          title: '红了！老哥稳',
+          tips: this.cast * 2 + '进账',
+          cb: () => {}
+        }
+      } else {
+        popUpInfo = {
+          show: true,
+          title: '没赢，老哥不太稳呀',
+          tips: '仍需再接再厉',
+          cb: () => {}
+        }
+      }
+      this.$store.commit('Show', popUpInfo)
+    }
+  },
   computed: {
     ...mapState({
       odds: state => state.SlotMachineStore.odds,
