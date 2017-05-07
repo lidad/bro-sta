@@ -140,6 +140,10 @@ export default {
           tips: '赢了加倍，输了一分钱都没有哦~',
           cb: this.beginPlaying
         }
+        const newBroSta = {
+          money: this.broStatus.money - this.cast,
+        }
+        this.$store.commit('UpdateBro', newBroSta);
       }
       this.$store.commit('Show', popUpInfo)
     }
