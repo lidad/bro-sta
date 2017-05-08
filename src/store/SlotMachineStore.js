@@ -76,17 +76,15 @@ const mutations = {
   },
   adjustOdds(state, plus) {
     const tempOdds = state.odds + plus * 0.5;
-    if (~~tempOdds)
+    if (~~ tempOdds)
       state.odds = tempOdds;
+    }
   }
-}
 
 let MachineT;
 
 const actions = {
-  beginPlaying({
-    commit
-  }) {
+  beginPlaying({commit}) {
     commit('begin');
     new Promise((resolve, reject) => {
       MachineT = setInterval(() => void commit('setResult'), STAND_RUN_TIME);
@@ -99,10 +97,7 @@ const actions = {
       runMachine(commit);
     })
   },
-  end({
-    state,
-    commit
-  }) {
+  end({commit}) {
     if (!MachineT)
       return;
     clearTimeout(MachineT);

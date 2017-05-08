@@ -1,15 +1,19 @@
 import Vue from 'vue';
 
-const state = {
+const originState = {
   show: false,
   title: '',
   tips: '',
   cb: () => {}
 }
 
+const state = {
+  ...originState
+}
+
 const mutations = {
   Show(state, data) {
-    Object.assign(state, data);
+    Object.assign(state, originState, data);
   },
   Hide(state) {
     state.show = false;

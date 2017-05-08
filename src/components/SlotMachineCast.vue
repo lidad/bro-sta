@@ -1,6 +1,6 @@
 <template>
 <div class="t-shadow frame-box game-cast">
-  <p>游戏费用：{{cast}}</p>
+  <p>花费：{{cast}}</p>
   <p>胜利将获得：{{rebate}}</p>
 </div>
 </template>

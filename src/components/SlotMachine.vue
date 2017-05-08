@@ -57,19 +57,16 @@ export default {
         popUpInfo = {
           show: true,
           title: '红了！老哥稳',
-          tips: rebate + '进账',
-          cb: () => {}
+          tips: rebate + '进账'
         }
-        const newBroSta = {
+        this.$store.commit('UpdateBro', {
           money: this.broStatus.money + rebate,
-        }
-        this.$store.commit('UpdateBro', newBroSta)
+        })
       } else {
         popUpInfo = {
           show: true,
           title: '没赢，老哥不太稳呀',
-          tips: '仍需再接再厉',
-          cb: () => {}
+          tips: '仍需再接再厉'
         }
       }
       this.endShow = true;
@@ -107,14 +104,14 @@ export default {
           cards,
           tempSelectedIndex
         } = state.SlotMachineStore;
-        return cards.find((card, i) => i === tempSelectedIndex);
+        return cards[tempSelectedIndex];
       },
       resultCard(state) {
         const {
           cards,
           resultIndex
         } = state.SlotMachineStore;
-        return cards.find((card, i) => i === resultIndex);
+        return cards[resultIndex];
       },
       cast(state) {
         const {
@@ -146,16 +143,18 @@ export default {
           title: '老哥，身上的钱不够耍呀'
         }
       } else {
+        const newBroSta = {
+          money: this.broStatus.money - this.cast,
+        }
         popUpInfo = {
           show: true,
           title: '老哥将花费' + this.cast + '玩一发',
           tips: '赢了加倍，输了一分钱都没有哦~',
-          cb: this.beginPlaying
+          cb: () => {
+            this.beginPlaying();
+            this.$store.commit('UpdateBro', newBroSta);
+          }
         }
-        const newBroSta = {
-          money: this.broStatus.money - this.cast,
-        }
-        this.$store.commit('UpdateBro', newBroSta);
       }
       this.$store.commit('Show', popUpInfo)
     }
