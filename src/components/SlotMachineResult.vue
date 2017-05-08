@@ -4,7 +4,7 @@
   <div class="items"><img v-for="(card, index) in downPlayingCards" class="tiger-item" :class="(index + 4  === resultIndex) ? 'b-block' : ''" :src="card" /></div>
   <div class="end-action">
     <img class="result" :src="resultCard" />
-    <button v-if="endGame" @click="playAgain" class="end t-shadow b-block">再来</button>
+    <button v-if="endGame" @click="play" class="end t-shadow b-block">再来</button>
     <button v-else @click="end" class="end t-shadow b-block">停</button>
   </div>
 </div>
@@ -25,14 +25,13 @@ export default {
     if (!this.endShow && this.playing && this.endGame) {
       let popUpInfo = {};
       if (this.selected === this.resultIndex) {
-        const rebate = this.cast * 2;
         popUpInfo = {
           show: true,
           title: '红了！老哥稳',
-          tips: rebate + '进账'
+          tips: this.rebate + '进账'
         }
         this.$store.commit('UpdateBro', {
-          money: this.broStatus.money + rebate,
+          money: this.broStatus.money + this.rebate,
         })
       } else {
         popUpInfo = {
@@ -76,12 +75,23 @@ export default {
           resultIndex
         } = state.SlotMachineStore;
         return cards[resultIndex];
+      },
+      rebate(state) {
+        const {
+          odds,
+          originalCast
+        } = state.SlotMachineStore;
+        return originalCast * odds * 2;
       }
     })
   },
   methods: {
     ...mapMutations(['playAgain']),
     ...mapActions(['end']),
+    play() {
+      this.endShow = false;
+      this.playAgain()
+    }
   }
 }
 </script>
