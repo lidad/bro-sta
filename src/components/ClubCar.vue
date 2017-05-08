@@ -19,7 +19,7 @@
     </div>
   </section>
   <MapFootLink/>
-  <PopUp/>
+  <Popup/>
 </div>
 </template>
 
@@ -31,7 +31,7 @@ import {
 
 import MapFootLink from './MapFootLink'
 import ConerStatus from './common/ConerStatus';
-import PopUp from './common/PopUp'
+import Popup from './common/Popup'
 
 export default {
   name: 'ClubCar',
@@ -72,12 +72,11 @@ export default {
       } = this.currentCarDetails;
       const leaveMoney = money - fee;
       if (leaveMoney < 0) {
-        const popUpInfo = {
+        this.$store.commit('Show', {
           show: true,
           title: '老哥，还差' + (~leaveMoney + 1) + '，总不能修霸王车吧～',
           tips: '老哥可以进场打工，过三关搞点路子'
-        }
-        this.$store.commit('Show', popUpInfo)
+        })
       } else {
         const newBroSta = {
           money: leaveMoney,
@@ -90,12 +89,11 @@ export default {
         }
         this.$store.commit('UpdateBro', newBroSta);
         this.$nextTick(() => {
-          const popUpInfo = {
+          this.$store.commit('Show', {
             show: true,
             title: '鸡儿梆硬！',
             tips: '修了一发，hp增加' + effect.hp + '，饱食度减少' + effect.hungry + '。具体信息可以参照左上角～'
-          };
-          this.$store.commit('Show', popUpInfo)
+          })
         });
       }
     }
@@ -103,7 +101,7 @@ export default {
   components: {
     MapFootLink,
     ConerStatus,
-    PopUp
+    Popup
   }
 }
 </script>

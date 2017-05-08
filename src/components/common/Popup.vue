@@ -12,7 +12,7 @@ import {
 } from 'vuex'
 
 export default {
-  name: 'PopUp',
+  name: 'Popup',
   computed: {
     ...mapState({
       show: state => state.PopUpStore.show,
