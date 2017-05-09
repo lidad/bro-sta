@@ -2,7 +2,7 @@
 <div class="map">
   <FootLink url="/status" :imgUrl="require('../assets/img/status_icon.jpg')" />
   <ActiveSign v-for="activity in allActivities" :activity="activity" :key="activity.id" @click.native="selectAction(activity.activityId)" />
-  <ActivityModal v-if="showModal" @hide="toggleAction" :activity="chosenActivity" />
+  <ActivityModal/>
 </div>
 </template>
 
@@ -13,7 +13,7 @@ import ActivityModal from './ActivityModal'
 
 import {
   mapState
-} from 'vuex'
+} from 'vuex';
 
 export default {
   name: 'MianMap',
@@ -35,9 +35,6 @@ export default {
       this.$store.commit('ChooseActivity', id)
       this.showModal = true;
     },
-    toggleAction() {
-      this.showModal = !this.showModal
-    }
   },
   components: {
     FootLink,

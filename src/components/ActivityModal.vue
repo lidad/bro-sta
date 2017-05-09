@@ -1,6 +1,6 @@
 <template>
-<div class="a-modal">
-  <AMask @hide="$emit('hide')" />
+<div v-if="activity.id" class="a-modal">
+  <AMask/>
   <div class="modal t-shadow frame-box">
     <p class="title">{{activity.name}}</p>
     <img class="bg" :src="activity.imgUrl" />
@@ -9,15 +9,30 @@
       <router-link class="ok" :to="activity.url">
         Go
       </router-link>
-      <a class="cancel" href="javascript:void(0);" @click="$emit('hide')">算了</a>
+      <a class="cancel" href="javascript:void(0);" @click="hide">算了</a>
     </div>
   </div>
 </div>
 </template>
 <script>
-import AMask from './common/AMask'
+import AMask from './common/AMask';
+
+import {
+  mapState
+} from 'vuex';
+
 export default {
-  props: ['activity'],
+  name: 'ActivityModal',
+  computed: {
+    ...mapState({
+      activity: state => state.ActivityStore.chosenActivity,
+    })
+  },
+  methods: {
+    hide(id) {
+      this.$store.commit('ChooseActivity', -1)
+    },
+  },
   components: {
     AMask
   }

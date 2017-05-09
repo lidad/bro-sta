@@ -49,7 +49,7 @@ const state = {
 
 const mutations = {
   ChooseActivity(state, id) {
-    state.chosenActivity = ACTIVITIES.find(activity => activity.id === id)
+    state.chosenActivity = ACTIVITIES.find(activity => activity.id === id) || {};
   }
 }
 

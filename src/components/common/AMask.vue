@@ -1,5 +1,5 @@
 <template>
-<div @click="$emit('hide')" class="mask">
+<div class="mask">
 </div>
 </template>
 
