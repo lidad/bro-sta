@@ -1,12 +1,12 @@
 <template>
-<div class="card-game" :style="position">
-  <img :src="imgUrl">
+<div class="card-game" :style="activity.position">
+  <img :src="activity.imgUrl">
 </div>
 </template>
 
 <script>
 export default {
-  props: ['position', 'imgUrl']
+  props: ['activity']
 }
 </script>
 

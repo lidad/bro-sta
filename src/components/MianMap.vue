@@ -1,8 +1,8 @@
 <template>
 <div class="map">
   <FootLink url="/status" :imgUrl="require('../assets/img/status_icon.jpg')" />
-  <ActiveSign v-for="activity in allActivities" :key="activity.id" :imgUrl="activity.imgUrl" :position="activity.position" @click.native="selectAction(activity.activityId)" />
-  <ActivityModal v-if="showModal" action="Go" @hide="toggleAction" :activity="chosenActivity" />
+  <ActiveSign v-for="activity in allActivities" :activity="activity" :key="activity.id" @click.native="selectAction(activity.activityId)" />
+  <ActivityModal v-if="showModal" @hide="toggleAction" :activity="chosenActivity" />
 </div>
 </template>
 
