@@ -72,7 +72,7 @@ export default {
       } = this.currentCarDetails;
       const leaveMoney = money - fee;
       if (leaveMoney < 0) {
-        this.$store.commit('Show', {
+        this.$store.commit('ShowModal', {
           show: true,
           title: '老哥，还差' + (~leaveMoney + 1) + '，总不能修霸王车吧～',
           tips: '老哥可以进场打工，过三关搞点路子'
@@ -84,12 +84,12 @@ export default {
             total: hp.total + effect.hp
           }),
           hungry: Object.assign({}, hungry, {
-            current: hungry.current - effect.hungry
+            current: hungry.current + effect.hungry
           })
         }
         this.$store.commit('UpdateBro', newBroSta);
         this.$nextTick(() => {
-          this.$store.commit('Show', {
+          this.$store.commit('ShowModal', {
             show: true,
             title: '鸡儿梆硬！',
             tips: '修了一发，hp增加' + effect.hp + '，饱食度减少' + effect.hungry + '。具体信息可以参照左上角～'

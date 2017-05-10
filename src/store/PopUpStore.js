@@ -12,10 +12,10 @@ const state = {
 }
 
 const mutations = {
-  Show(state, data) {
+  ShowModal(state, data) {
     Object.assign(state, originState, data);
   },
-  Hide(state) {
+  HideModal(state) {
     state.show = false;
     state.title = '';
     state.tips = '';

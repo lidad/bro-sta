@@ -75,7 +75,7 @@ export default {
           }
         }
       }
-      this.$store.commit('Show', popUpInfo)
+      this.$store.commit('ShowModal', popUpInfo)
     }
   }
 }

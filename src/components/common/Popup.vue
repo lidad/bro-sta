@@ -24,7 +24,7 @@ export default {
   methods: {
     hide() {
       this.cb();
-      this.$store.commit('Hide');
+      this.$store.commit('HideModal');
     }
   }
 }

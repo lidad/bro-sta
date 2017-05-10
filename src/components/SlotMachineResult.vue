@@ -41,7 +41,7 @@ export default {
         }
       }
       this.endShow = true;
-      this.$store.commit('Show', popUpInfo);
+      this.$store.commit('ShowModal', popUpInfo);
     }
   },
   data() {
