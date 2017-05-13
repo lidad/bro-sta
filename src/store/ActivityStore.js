@@ -40,8 +40,8 @@ const OFFCIALHOTEL = {
   imgUrl: require('../assets/img/offcial_hotel.png'),
   positions: [
     {
-      left: '56%',
-      top: '68%'
+      left: '38%',
+      top: '66%'
     }
   ]
 }
