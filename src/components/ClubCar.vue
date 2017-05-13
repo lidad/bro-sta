@@ -9,9 +9,9 @@
     <p class="intro">{{currentCarDetails.intro}}</p>
     <P class="effect">生命最大值+{{currentCarDetails.effect.hp}}，饱食度{{currentCarDetails.effect.hungry}}</p>
     <div class="cut-car">
-      <button @click="cutCar(-1)" class="left b-block"><</button>
+      <button @click="cutCar(-1)" class="left b-block"><img src="../assets/img/left.png"></button>
       <p class="fee">¥ {{currentCarDetails.fee}}</p>
-      <button @click="cutCar(1)" class="right b-block">></button>
+      <button @click="cutCar(1)" class="right b-block"><img src="../assets/img/right.png"></button>
     </div>
     <div class="actions">
       <button @click="fixIt" class="left b-block t-shadow">修</button>
@@ -107,6 +107,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/rem.scss";
 .fixCar {
     position: relative;
     height: 100vh;
@@ -135,17 +136,21 @@ export default {
     .effect,
     .fee,
     .intro {
-        margin: 2vh 0;
-        font-size: 0.8em;
+        margin: px2rem(15) 0;
+        font-size: px2rem(16);
         padding: 0 4%;
     }
     .fee {
-        font-size: 1.2em;
+        font-size: px2rem(24);
         color: rgba(255, 255, 255,0.9);
     }
     .left,
     .right {
-        font-size: 1.3em;
+        padding: 0;
+        img {
+            width: px2rem(30);
+            vertical-align: middle;
+        }
     }
     .cut-car {
         margin: 0 auto;
@@ -158,15 +163,15 @@ export default {
         }
     }
     .actions {
-        margin: 3vh auto;
+        margin: px2rem(23) auto;
         width: 50vw;
         .left,
         .right {
-            font-size: 1.2em;
-            width: 40%;
+            font-size: px2rem(22);
+            width: px2rem(60);
         }
         .left {
-            margin-right: 5%;
+            margin-right: px2rem(10);
         }
     }
 }
