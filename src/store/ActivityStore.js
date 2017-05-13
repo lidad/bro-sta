@@ -31,7 +31,22 @@ const CLUB = {
   ]
 }
 
-const ACTIVITIES = [GAMBLING, CLUB];
+const OFFCIALHOTEL = {
+  id: 'AJFHKJ23H',
+  name: '官方大酒店',
+  url: '/hotel',
+  tips: '来到官方大酒店，补充点老哥的体力，价格实惠，童叟无欺',
+  signImg: require('../assets/img/offcial_hotel.png'),
+  imgUrl: require('../assets/img/offcial_hotel.png'),
+  positions: [
+    {
+      left: '56%',
+      top: '68%'
+    }
+  ]
+}
+
+const ACTIVITIES = [GAMBLING, CLUB, OFFCIALHOTEL];
 
 function _spreadActivies() {
   return this.positions.map((position) => {
@@ -42,7 +57,8 @@ function _spreadActivies() {
 const state = {
   allActivities: [
     ..._spreadActivies.call(GAMBLING),
-    ..._spreadActivies.call(CLUB)
+    ..._spreadActivies.call(CLUB),
+    ..._spreadActivies.call(OFFCIALHOTEL)
   ],
   chosenActivity: {}
 }

@@ -1,10 +1,11 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import MianMap from '@/components/MianMap'
-import BroStatus from '@/components/BroStatus'
-import ClubCar from '@/components/ClubCar'
-import SlotMachine from '@/components/SlotMachine'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Hello from '@/components/Hello';
+import MianMap from '@/components/MianMap';
+import BroStatus from '@/components/BroStatus';
+import ClubCar from '@/components/ClubCar';
+import SlotMachine from '@/components/SlotMachine';
+import OffcialHotel from '@/components/OffcialHotel';
 
 Vue.use(Router)
 
@@ -30,6 +31,10 @@ export default new Router({
       path: '/slotMachine',
       name: 'slotMachine',
       component: SlotMachine
+    }, {
+      path: '/hotel',
+      name: 'OffcialHotel',
+      component: OffcialHotel
     }
   ]
 })
