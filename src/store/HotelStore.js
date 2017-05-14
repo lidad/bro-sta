@@ -1,5 +1,5 @@
 import Vue from 'vue';
-cnost DISH = [
+const DISH = [
   {
     id: 'k13hkr31413',
     name: '飘香拌面',

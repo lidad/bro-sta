@@ -7,6 +7,7 @@ import ActivityStore from './ActivityStore';
 import ClubStore from './ClubStore';
 import PopUpStore from './PopUpStore';
 import SlotMachineStore from './SlotMachineStore';
+import HotelStore from './HotelStore';
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     ActivityStore,
     ClubStore,
     PopUpStore,
-    SlotMachineStore
+    SlotMachineStore,
+    HotelStore
   }
 })
 
