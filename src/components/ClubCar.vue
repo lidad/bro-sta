@@ -71,11 +71,18 @@ export default {
         effect
       } = this.currentCarDetails;
       const leaveMoney = money - fee;
+      const leavehungry = hungry.current + effect.hungry;
       if (leaveMoney < 0) {
         this.$store.commit('ShowModal', {
           show: true,
           title: '老哥，还差' + (~leaveMoney + 1) + '，总不能修霸王车吧～',
           tips: '老哥可以进场打工，过三关搞点路子'
+        })
+      } else if (leavehungry < 0) {
+        this.$store.commit('ShowModal', {
+          show: true,
+          title: '修不动了，饿！',
+          tips: '给鸡儿放个假吧～'
         })
       } else {
         const newBroSta = {
