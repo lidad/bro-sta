@@ -9,10 +9,11 @@
     <button class="left b-block t-shadow" @click="selectDish(-1)"><img src="../assets/img/left.png"></button>
     <button class="right b-block t-shadow" @click="selectDish(1)"><img src="../assets/img/right.png"></button>
     <div class="action">
-      <button class="btn b-block">吃</button>
-      <button class="btn b-block">闪</button>
+      <button @click="eat" class="btn b-block">吃</button>
+      <button @click="back" class="btn b-block">闪</button>
     </div>
   </section>
+  <Popup/>
   <MapFootLink/>
 </div>
 </template>
@@ -23,12 +24,14 @@ import {
 } from 'vuex';
 
 import ConerStatus from './common/ConerStatus';
+import Popup from './common/Popup';
 import MapFootLink from './MapFootLink';
 
 export default {
   name: 'OffcialHotel',
   computed: {
     ...mapState({
+      broStatus: state => state.BroStore.broStatus,
       selectdedDish(state) {
         const {
           dishes,
@@ -40,10 +43,47 @@ export default {
   },
   methods: {
     ...mapMutations(['selectDish']),
+    eat() {
+      const {
+        money,
+        hungry
+      } = this.broStatus;
+      const {
+        fee,
+        effect
+      } = this.selectdedDish;
+      const leaveMoney = money - fee;
+      if (leaveMoney < 0) {
+        this.$store.commit('ShowModal', {
+          show: true,
+          title: '穷逼，没钱还来消费',
+          tips: '难道你还想跑单？'
+        })
+      } else {
+        const newBroSta = {
+          money: leaveMoney,
+          hungry: Object.assign({}, hungry, {
+            current: Math.min(hungry.current + effect, hungry.total)
+          })
+        }
+        this.$store.commit('UpdateBro', newBroSta);
+        this.$nextTick(() => {
+          this.$store.commit('ShowModal', {
+            show: true,
+            title: '吃完～',
+            tips: '饱食度增加' + effect
+          })
+        });
+      }
+    },
+    back() {
+      this.$router.back()
+    }
   },
   components: {
     ConerStatus,
-    MapFootLink
+    MapFootLink,
+    Popup
   }
 }
 </script>
