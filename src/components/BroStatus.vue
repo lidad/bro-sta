@@ -8,6 +8,9 @@
     <p>攻击力<span class="fr">{{broStatus.ap}}</span></p>
     <p>敏捷<span class="fr">{{broStatus.sp}}</span></p>
     <p>钱<span class="fr">{{broStatus.money}}</span></p>
+    <br/>
+    <p>账单<span class="fr">{{broStatus.debt}}</span></p>
+    <p>今日应还<span class="fr">{{broStatus.dailyAccount}}</span></p>
   </div>
   <MapFootLink/>
 </div>

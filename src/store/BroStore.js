@@ -12,7 +12,9 @@ const BRO_STATUS = {
     current: 60
   },
   ap: 100,
-  sp: 100
+  sp: 100,
+  debt: 2000,
+  dailyAccount: 34
 }
 
 const state = {
