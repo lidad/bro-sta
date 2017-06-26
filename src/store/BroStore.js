@@ -21,7 +21,7 @@ const state = {
 
 const mutations = {
   UpdateBro(state, data) {
-    Object.assign(state.broStatus, data);
+    state.broStatus = Object.assign({}, state.broStatus, data);
   }
 }
 
