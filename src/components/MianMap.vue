@@ -7,9 +7,10 @@
 </template>
 
 <script>
-import FootLink from './common/FootLink'
-import ActiveSign from './ActiveSign'
-import ActivityModal from './ActivityModal'
+import FootLink from './common/FootLink';
+import ActiveSign from './ActiveSign';
+import ActivityModal from './ActivityModal';
+import Popup from './common/Popup';
 
 import {
   mapState
@@ -28,7 +29,16 @@ export default {
       fixCarR: state => state.RuleStore.fixCarR,
       allActivities: state => state.ActivityStore.allActivities,
       chosenActivity: state => state.ActivityStore.chosenActivity,
+      broStatus: state => state.BroStore.broStatus,
     })
+  },
+  created() {
+    if (this.broStatus.dailyAccount)
+      this.$store.commit('ShowModal', {
+        show: true,
+        title: '还有代还款～',
+        tips: `今日应还${this.broStatus.dailyAccount}`
+      })
   },
   methods: {
     selectAction(id) {
