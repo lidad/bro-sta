@@ -3,6 +3,7 @@
   <FootLink url="/status" :imgUrl="require('../assets/img/status_icon.jpg')" />
   <ActiveSign v-for="activity in allActivities" :activity="activity" :key="activity.id" @click.native="selectAction(activity.activityId)" />
   <ActivityModal/>
+  <Popup/>
 </div>
 </template>
 
@@ -49,7 +50,8 @@ export default {
   components: {
     FootLink,
     ActiveSign,
-    ActivityModal
+    ActivityModal,
+    Popup
   }
 }
 </script>
