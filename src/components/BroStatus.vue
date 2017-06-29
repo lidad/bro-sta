@@ -12,6 +12,7 @@
     <p>账单<span class="fr">{{broStatus.debt}}</span></p>
     <p>今日应还<span class="fr">{{broStatus.dailyAccount}}</span></p>
   </div>
+  <a href="javascript:void(0);" class="pay frame-box">还款</a>
   <MapFootLink/>
 </div>
 </template>
@@ -70,6 +71,13 @@ export default {
             font-size: px2rem(10);
             color: #e9e9e9;
         }
+    }
+    .pay {
+        color: rgba(255, 255, 255,0.7);
+        position: fixed;
+        left: 5%;
+        bottom: 3%;
+        padding: px2rem(4) px2rem(8);
     }
 }
 </style>
