@@ -13,6 +13,10 @@
     <p>今日应还<span class="fr">{{broStatus.dailyAccount}}</span></p>
   </div>
   <a href="javascript:void(0);" class="pay frame-box">还款</a>
+  <div v-if="isShowPay" class="pay-debt">
+    <button>还今日款</button>
+    <button>还所有欠款</button>
+  </div>
   <MapFootLink/>
 </div>
 </template>
@@ -27,6 +31,11 @@ import {
 
 export default {
   name: 'BroStatus',
+  data() {
+    return {
+      isShowPay: false
+    }
+  },
   computed: {
     ...mapState({
       broStatus: state => state.BroStore.broStatus,
