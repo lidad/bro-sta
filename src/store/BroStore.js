@@ -24,6 +24,18 @@ const state = {
 const mutations = {
   UpdateBro(state, data) {
     state.broStatus = Object.assign({}, state.broStatus, data);
+  },
+  payDailyDebt(state, money) {
+    state.broStatus = Object.assign({}, state.broStatus, {
+      money: state.money - money,
+      dailyAccount: state.dailyAccount - money
+    });
+  },
+  payAllDebt(state, money) {
+    state.broStatus = Object.assign({}, state.broStatus, {
+      money: state.money - money,
+      dailyAccount: state.dailyAccount - money
+    });
   }
 }
 
