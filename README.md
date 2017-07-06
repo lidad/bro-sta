@@ -25,5 +25,4 @@ npm run build --report
 ## todos
 
 1. 哄抬BI价
-2. 官方大酒店
-3. 进厂打工
+2. 进厂打工
