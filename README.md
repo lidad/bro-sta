@@ -1,5 +1,7 @@
 # 老哥稳👊
 
+![image](https://raw.github.com/lidad/bro-sta/master/src/assets/img/oldbro.jpg)
+
 - 基于vue
 - 讲述老哥自己的故事
 - 跑单，修车，过三关，美滋滋

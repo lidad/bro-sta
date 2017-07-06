@@ -37,7 +37,7 @@ export default {
     if (this.broStatus.dailyAccount)
       this.$store.commit('ShowModal', {
         show: true,
-        title: '还有代还款～',
+        title: '还有待还款～',
         tips: `今日应还${this.broStatus.dailyAccount}`
       })
   },
